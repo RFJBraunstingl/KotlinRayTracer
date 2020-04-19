@@ -4,15 +4,13 @@ import dev.rfj.domain.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-import java.lang.RuntimeException
 import kotlin.test.assertEquals
-import kotlin.test.assertFails
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class TupleSteps {
-
-    private val tupleStore = TupleStore()
+class TupleSteps(
+        private val tupleStore: TupleStore
+) {
 
     @Given("{string} <- tuple\\({double}, {double}, {double}, {double})")
     fun createTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
@@ -63,5 +61,10 @@ class TupleSteps {
             "vector" -> assertFalse { tuple.isVector() }
             else -> throw RuntimeException("I do not know how to verify this")
         }
+    }
+
+    @Then("{string} = tuple\\({double}, {double}, {double}, {double})")
+    fun verifyTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
+        assertEquals(Tuple(x, y, z, w), tupleStore.findByName(name))
     }
 }
