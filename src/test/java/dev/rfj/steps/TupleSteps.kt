@@ -17,34 +17,28 @@ class TupleSteps(
         tupleStore.save(name, Tuple.create(x, y, z, w))
     }
 
-    @Then("{string}.x = {double}")
-    fun validateXValueOfTupleWithName(name: String, x: Double) {
-        val tuple = tupleStore.findByName(name)
+    @Then("{tupleName}.x = {double}")
+    fun validateXValueOfTupleWithName(tuple: Tuple, x: Double) {
         assertEquals(x, tuple.x)
     }
 
-    @Then("{string}.y = {double}")
-    fun validateYValueOfTupleWithName(name: String, y: Double) {
-        val tuple = tupleStore.findByName(name)
+    @Then("{tupleName}.y = {double}")
+    fun validateYValueOfTupleWithName(tuple: Tuple, y: Double) {
         assertEquals(y, tuple.y)
     }
 
-    @Then("{string}.z = {double}")
-    fun validateZValueOfTupleWithName(name: String, z: Double) {
-        val tuple = tupleStore.findByName(name)
+    @Then("{tupleName}.z = {double}")
+    fun validateZValueOfTupleWithName(tuple: Tuple, z: Double) {
         assertEquals(z, tuple.z)
     }
 
-    @Then("{string}.w = {double}")
-    fun validateWValueOfTupleWithName(name: String, w: Double) {
-        val tuple = tupleStore.findByName(name)
+    @Then("{tupleName}.w = {double}")
+    fun validateWValueOfTupleWithName(tuple: Tuple, w: Double) {
         assertEquals(w, tuple.w)
     }
 
-    @Then("{string} is a {string}")
-    fun isA(name: String, type: String) {
-        val tuple = tupleStore.findByName(name)
-
+    @Then("{tupleName} is a {string}")
+    fun isA(tuple: Tuple, type: String) {
         when (type) {
             "point" -> assertTrue { tuple.isPoint() }
             "vector" -> assertTrue { tuple.isVector() }
@@ -52,10 +46,8 @@ class TupleSteps(
         }
     }
 
-    @Then("{string} is not a {string}")
-    fun isNotA(name: String, type: String) {
-        val tuple = tupleStore.findByName(name)
-
+    @Then("{tupleName} is not a {string}")
+    fun isNotA(tuple: Tuple, type: String) {
         when (type) {
             "point" -> assertFalse { tuple.isPoint() }
             "vector" -> assertFalse { tuple.isVector() }
@@ -63,8 +55,8 @@ class TupleSteps(
         }
     }
 
-    @Then("{string} = tuple\\({double}, {double}, {double}, {double})")
-    fun verifyTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
-        assertEquals(Tuple.create(x, y, z, w), tupleStore.findByName(name))
+    @Then("{tupleName} = {tuple}")
+    fun verifyTuple(actual: Tuple, expected: Tuple) {
+        assertEquals(expected, actual)
     }
 }

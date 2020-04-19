@@ -8,7 +8,7 @@ class CustomGherkinTypes(
         private val tupleStore: TupleStore
 ) {
 
-    @ParameterType("tuple\\((\\d+\\.\\d+), (\\d+\\.\\d+), (\\d+\\.\\d+), (\\d+\\.\\d+)\\)")
+    @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun tuple(x: String, y: String, z: String, w: String): Tuple {
         return Tuple.create(
                 x.toDouble(),
