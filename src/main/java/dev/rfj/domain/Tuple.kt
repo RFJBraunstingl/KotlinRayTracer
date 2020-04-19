@@ -54,4 +54,13 @@ data class Tuple(
     operator fun unaryMinus(): Tuple {
         return create(-x, -y, -z, -w)
     }
+
+    fun multipliedBy(scalar: Double): Tuple {
+        return create(
+                x * scalar,
+                y * scalar,
+                z * scalar,
+                w * scalar
+        )
+    }
 }

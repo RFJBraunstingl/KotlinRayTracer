@@ -61,4 +61,12 @@ class TupleTests {
         val expect = Tuple.create(-1.0, 2.0, -3.0, 4.0)
         assertEquals(expect, -aTuple)
     }
+
+    @Test
+    fun testScalarMultiplication() {
+        val aTuple = Tuple.create(1.0, -2.0, 3.0, -4.0)
+        val aScalar = 3.5
+        val expect = Tuple.create(3.5, -7.0, 10.5, -14.0)
+        assertEquals(expect, aTuple.multipliedBy(aScalar))
+    }
 }
