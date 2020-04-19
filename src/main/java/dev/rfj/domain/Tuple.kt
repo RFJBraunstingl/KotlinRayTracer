@@ -50,4 +50,8 @@ data class Tuple(
                     z - sub.z,
                     w - sub.w
             )
+
+    operator fun unaryMinus(): Tuple {
+        return create(-x, -y, -z, -w)
+    }
 }
