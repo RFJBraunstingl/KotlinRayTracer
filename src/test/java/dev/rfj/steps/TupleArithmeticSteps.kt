@@ -25,4 +25,9 @@ class TupleArithmeticSteps {
         assertTrue { actualResult.isPoint() }
         assertEquals(result, actualResult)
     }
+
+    @Then("{tupleName} * {double} = {tuple}")
+    fun verifyScalarMultiplication(tuple: Tuple, scalar: Double, expected: Tuple) {
+        assertEquals(expected, tuple.multipliedBy(scalar));
+    }
 }
