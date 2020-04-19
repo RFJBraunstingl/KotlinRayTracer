@@ -54,4 +54,11 @@ class TupleTests {
         val expect = Tuple.create(-1.0,0.0, 1.0, 0.0)
         assertEquals(expect, tuple1.minus(tuple2))
     }
+
+    @Test
+    fun testTupleNegation() {
+        val aTuple = Tuple.create(1.0, -2.0, 3.0, -4.0)
+        val expect = Tuple.create(-1.0, 2.0, -3.0, 4.0)
+        assertEquals(expect, -aTuple)
+    }
 }
