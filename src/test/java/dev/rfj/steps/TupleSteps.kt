@@ -14,7 +14,7 @@ class TupleSteps(
 
     @Given("{string} <- tuple\\({double}, {double}, {double}, {double})")
     fun createTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
-        tupleStore.save(name, Tuple(x, y, z, w));
+        tupleStore.save(name, Tuple.create(x, y, z, w))
     }
 
     @Then("{string}.x = {double}")
@@ -65,6 +65,6 @@ class TupleSteps(
 
     @Then("{string} = tuple\\({double}, {double}, {double}, {double})")
     fun verifyTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
-        assertEquals(Tuple(x, y, z, w), tupleStore.findByName(name))
+        assertEquals(Tuple.create(x, y, z, w), tupleStore.findByName(name))
     }
 }

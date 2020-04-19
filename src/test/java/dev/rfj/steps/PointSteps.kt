@@ -10,6 +10,7 @@ class PointSteps(
 
     @Given("{string} <- point\\({double}, {double}, {double})")
     fun createPointTuple(name: String, x: Double, y: Double, z: Double) {
-        tupleStore.save(name, Tuple(x, y, z, 1.0))
+        val pointTuple = Tuple.createPoint(x, y, z)
+        tupleStore.save(name, pointTuple)
     }
 }
