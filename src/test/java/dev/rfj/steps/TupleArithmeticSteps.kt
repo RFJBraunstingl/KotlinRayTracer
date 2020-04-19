@@ -3,6 +3,7 @@ package dev.rfj.steps
 import dev.rfj.domain.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Then
+import org.junit.Assert
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -45,5 +46,11 @@ class TupleArithmeticSteps(
         )
 
         assertEquals(expected, actual.dividedBy(scalar))
+    }
+
+    @Then("magnitude\\({tupleName}) = {double}")
+    fun verifyMagnitudeCalculation(tuple: Tuple, magnitude: Double) {
+        val delta = 0.00001
+        Assert.assertEquals(magnitude, tuple.magnitude(), delta)
     }
 }

@@ -66,3 +66,12 @@ Feature: Tuples
   Scenario: Dividing a tuple by a scalar
     Given "a" <- tuple(1.0, -2.0, 3.0, -4.0)
     Then a / 2.0 = tuple(0.5, -1.0, 1.5, -2.0)
+
+  Scenario: Calculate magnitude of Unit vector
+    Given "v" <- vector(1.0, 0.0, 0.0)
+    Then magnitude(v) = 1
+
+  Scenario: Calculate magnitude of ordinary vector
+    Given "v" <- vectore(1.0, 2.0, 3.0)
+    # checking with precision 0.00001
+    Then magnitude(v) = 3.7416573

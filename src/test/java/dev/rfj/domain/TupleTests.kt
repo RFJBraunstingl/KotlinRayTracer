@@ -1,6 +1,7 @@
 package dev.rfj.domain
 
 import org.junit.jupiter.api.Test
+import kotlin.math.sqrt
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
@@ -76,5 +77,22 @@ class TupleTests {
         val halfed = Tuple.create(0.5, -1.0, 1.5, -2.0)
 
         assertEquals(halfed, aTuple.dividedBy(2.0))
+    }
+
+    @Test
+    fun testUnitVectorMagnitude() {
+        val unitVectorMagnitude = 1.0
+
+        assertEquals(unitVectorMagnitude, Tuple.createVector(1.0, 0.0, 0.0).magnitude())
+        assertEquals(unitVectorMagnitude, Tuple.createVector(0.0, 1.0, 0.0).magnitude())
+        assertEquals(unitVectorMagnitude, Tuple.createVector(0.0, 0.0, 1.0).magnitude())
+    }
+
+    @Test
+    fun testMagnitudeCalculation() {
+        val vector1 = Tuple.createVector(1.0, 2.0, 3.0)
+        val vector2 = Tuple.createVector(-1.0, -2.0, -3.0)
+        assertEquals(sqrt(14.0), vector1.magnitude())
+        assertEquals(sqrt(14.0), vector2.magnitude())
     }
 }

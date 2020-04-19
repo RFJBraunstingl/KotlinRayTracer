@@ -1,5 +1,7 @@
 package dev.rfj.domain
 
+import kotlin.math.sqrt
+
 data class Tuple(
         val x: Double,
         val y: Double,
@@ -71,5 +73,10 @@ data class Tuple(
                 z / scalar,
                 w / scalar
         )
+    }
+
+    fun magnitude(): Double {
+        val sumOfCubes = x * x + y * y + z * z + w * w
+        return sqrt(sumOfCubes)
     }
 }
