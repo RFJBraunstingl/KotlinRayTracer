@@ -54,3 +54,7 @@ Feature: Tuples
   Scenario: Negating a tuple
     Given "a" <- tuple(1.0, -2.0, 3.0, -4.0)
     Then -a = tuple(-1.0, 2.0, -3.0, 4.0)
+
+  Scenario: Multiplying a tuple by a scalar
+    Given "a" <- tuple(1.0, -2.0, 3.0, -4.0)
+    Then a * 3.5 = tuple(3.5, -7.0, 10.5, -14.0)
