@@ -1,14 +1,67 @@
-package dev.rfj.steps;
+package dev.rfj.steps
 
-import dev.rfj.domain.TupleStore;
-import io.cucumber.java.en.Given;
+import dev.rfj.domain.Tuple
+import dev.rfj.domain.store.TupleStore
+import io.cucumber.java.en.Given
+import io.cucumber.java.en.Then
+import java.lang.RuntimeException
+import kotlin.test.assertEquals
+import kotlin.test.assertFails
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
-public class TupleSteps {
+class TupleSteps {
 
-    private TupleStore tupleStore;
+    private val tupleStore = TupleStore()
 
     @Given("{string} <- tuple\\({double}, {double}, {double}, {double})")
-    public void createTuple(String name, double x, double y, double z, double w) {
-        //tupleStore.put(name, new Tuple(x, y, z, w));
+    fun createTuple(name: String, x: Double, y: Double, z: Double, w: Double) {
+        tupleStore.save(name, Tuple(x, y, z, w));
+    }
+
+    @Then("{string}.x = {double}")
+    fun validateXValueOfTupleWithName(name: String, x: Double) {
+        val tuple = tupleStore.findByName(name)
+        assertEquals(x, tuple.x)
+    }
+
+    @Then("{string}.y = {double}")
+    fun validateYValueOfTupleWithName(name: String, y: Double) {
+        val tuple = tupleStore.findByName(name)
+        assertEquals(y, tuple.y)
+    }
+
+    @Then("{string}.z = {double}")
+    fun validateZValueOfTupleWithName(name: String, z: Double) {
+        val tuple = tupleStore.findByName(name)
+        assertEquals(z, tuple.z)
+    }
+
+    @Then("{string}.w = {double}")
+    fun validateWValueOfTupleWithName(name: String, w: Double) {
+        val tuple = tupleStore.findByName(name)
+        assertEquals(w, tuple.w)
+    }
+
+    @Then("{string} is a {string}")
+    fun isA(name: String, type: String) {
+        val tuple = tupleStore.findByName(name)
+
+        when (type) {
+            "point" -> assertTrue { tuple.isPoint() }
+            "vector" -> assertTrue { tuple.isVector() }
+            else -> throw RuntimeException("I do not know how to verify this")
+        }
+    }
+
+    @Then("{string} is not a {string}")
+    fun isNotA(name: String, type: String) {
+        val tuple = tupleStore.findByName(name)
+
+        when (type) {
+            "point" -> assertFalse { tuple.isPoint() }
+            "vector" -> assertFalse { tuple.isVector() }
+            else -> throw RuntimeException("I do not know how to verify this")
+        }
     }
 }
