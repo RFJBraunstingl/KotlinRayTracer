@@ -2,6 +2,7 @@ package dev.rfj.steps
 
 import dev.rfj.domain.Tuple
 import io.cucumber.java.en.Then
+import sun.security.util.PendingException
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -29,5 +30,10 @@ class TupleArithmeticSteps {
     @Then("{tupleName} * {double} = {tuple}")
     fun verifyScalarMultiplication(tuple: Tuple, scalar: Double, expected: Tuple) {
         assertEquals(expected, tuple.multipliedBy(scalar));
+    }
+
+    @Then("{tupleName} / {double} = {tuple}")
+    fun verifyScalarDivision(tuple: Tuple, scalar: Double, expected: Tuple) {
+        throw PendingException()
     }
 }
