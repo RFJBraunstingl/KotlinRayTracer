@@ -9,7 +9,7 @@ data class Tuple(
 
     companion object {
 
-        val ZERO = Tuple(0.0, 0.0, 0.0, 0.0)
+        val ZERO_VECTOR = Tuple(0.0, 0.0, 0.0, 0.0)
 
         fun create(
                 x: Double,

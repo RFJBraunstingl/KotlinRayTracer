@@ -10,7 +10,7 @@ class TupleTests {
 
     @Test
     fun testTupleCreation() {
-        assertEquals(Tuple.ZERO, Tuple.create(0.0, 0.0, 0.0, 0.0))
+        assertEquals(Tuple.ZERO_VECTOR, Tuple.create(0.0, 0.0, 0.0, 0.0))
     }
 
     @Test

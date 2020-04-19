@@ -46,3 +46,11 @@ Feature: Tuples
     And "v2" <- vector(5.0, 6.0, 7.0)
     Then v1 - v2 = vector(-2.0, -4.0, -6.0)
 
+  Scenario: Substract a vector from the zero vector
+    Given "zero" <- vector(0.0, 0.0, 0.0)
+    And "v" <- vector(1.0, -2.0, 3.0)
+    Then zero - v = vector(-1.0, 2.0, -3.0)
+
+  Scenario: Negating a tuple
+    Given "a" <- tuple(1.0, -2.0, 3.0, -4.0)
+    Then -a = tuple(-1.0, 2.0, -3.0, 4.0)

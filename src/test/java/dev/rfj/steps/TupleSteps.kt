@@ -59,4 +59,9 @@ class TupleSteps(
     fun verifyTuple(actual: Tuple, expected: Tuple) {
         assertEquals(expected, actual)
     }
+
+    @Then("-{tupleName} = {tuple}")
+    fun verifyNegatedTuple(toNegate: Tuple, expected: Tuple) {
+
+    }
 }
