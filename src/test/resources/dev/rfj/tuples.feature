@@ -30,3 +30,8 @@ Feature: Tuples
     Given "a1" <- tuple(3.0, -2.0, 5.0, 1.0)
     And "a2" <- tuple(-2.0, 3.0, 1.0, 0.0)
     Then a1 + a2 = tuple(1.0, 1.0, 6.0, 1.0)
+
+  Scenario: Substracting two points
+    Given "p1" <- point(3.0, 2.0, 1.0)
+    And "p2" <- point(5.0, 6.0, 7.0)
+    Then p1 - p2 = vector(-2.0, -4.0, -6.0)
