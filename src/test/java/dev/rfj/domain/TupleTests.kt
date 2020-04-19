@@ -1,5 +1,6 @@
 package dev.rfj.domain
 
+import org.junit.Assert
 import org.junit.jupiter.api.Test
 import kotlin.math.sqrt
 import kotlin.test.assertEquals
@@ -26,7 +27,7 @@ class TupleTests {
 
     @Test
     fun testVectorCreation() {
-        val vector = Tuple.createVector(1.0, 2.0, 3.0)
+        val vector = Tuple.vector(1.0, 2.0, 3.0)
         assertEquals(Tuple.create(1.0, 2.0, 3.0, 0.0), vector)
         assertTrue { vector.isVector() }
         assertFalse { vector.isPoint() }
@@ -34,7 +35,7 @@ class TupleTests {
 
     @Test
     fun testPointCreation() {
-        val point = Tuple.createPoint(1.0, 2.0, 3.0)
+        val point = Tuple.point(1.0, 2.0, 3.0)
         assertEquals(Tuple.create(1.0, 2.0, 3.0, 1.0), point)
         assertTrue { point.isPoint() }
         assertFalse { point.isVector() }
@@ -83,16 +84,66 @@ class TupleTests {
     fun testUnitVectorMagnitude() {
         val unitVectorMagnitude = 1.0
 
-        assertEquals(unitVectorMagnitude, Tuple.createVector(1.0, 0.0, 0.0).magnitude())
-        assertEquals(unitVectorMagnitude, Tuple.createVector(0.0, 1.0, 0.0).magnitude())
-        assertEquals(unitVectorMagnitude, Tuple.createVector(0.0, 0.0, 1.0).magnitude())
+        assertEquals(unitVectorMagnitude, Tuple.vector(1.0, 0.0, 0.0).magnitude())
+        assertEquals(unitVectorMagnitude, Tuple.vector(0.0, 1.0, 0.0).magnitude())
+        assertEquals(unitVectorMagnitude, Tuple.vector(0.0, 0.0, 1.0).magnitude())
     }
 
     @Test
     fun testMagnitudeCalculation() {
-        val vector1 = Tuple.createVector(1.0, 2.0, 3.0)
-        val vector2 = Tuple.createVector(-1.0, -2.0, -3.0)
+        val vector1 = Tuple.vector(1.0, 2.0, 3.0)
+        val vector2 = Tuple.vector(-1.0, -2.0, -3.0)
         assertEquals(sqrt(14.0), vector1.magnitude())
         assertEquals(sqrt(14.0), vector2.magnitude())
+    }
+
+    @Test
+    fun testSimpleVectorNormalization() {
+        val xVector = Tuple.vector(4.0, 0.0, 0.0)
+        val xNormal = Tuple.vector(1.0, 0.0, 0.0)
+
+        val yVector = Tuple.vector(0.0, 4.0, 0.0)
+        val yNormal = Tuple.vector(0.0, 1.0, 0.0)
+
+        val zVector = Tuple.vector(0.0, 0.0, 4.0)
+        val zNormal = Tuple.vector(0.0, 0.0, 1.0)
+
+        assertEquals(xNormal, xVector.normalize())
+        assertEquals(yNormal, yVector.normalize())
+        assertEquals(zNormal, zVector.normalize())
+    }
+
+    @Test
+    fun testOrdinaryNormalization() {
+        val ordinaryVector = Tuple.vector(1.0, 2.0, 3.0)
+        //                                      1/sqrt(14)  2/sqrt(14)  3/sqrt(14)
+        val ordinaryNormal = Tuple.vector(0.26726, 0.53452, 0.80178)
+
+        /* assert floating point values with delta */
+        val delta = 0.00001
+        val normalized = ordinaryVector.normalize()
+        Assert.assertEquals(ordinaryNormal.x, normalized.x, delta)
+        Assert.assertEquals(ordinaryNormal.y, normalized.y, delta)
+        Assert.assertEquals(ordinaryNormal.z, normalized.z, delta)
+    }
+
+    @Test
+    fun testDotProduct() {
+        val vec1 = Tuple.vector(1.0, 2.0, 3.0)
+        val vec2 = Tuple.vector(2.0, 3.0, 4.0)
+
+        assertEquals(20.0, vec1.dotProduct(vec2))
+    }
+
+    @Test
+    fun testCrossProduct() {
+        val vec1 = Tuple.vector(1.0, 2.0, 3.0)
+        val vec2 = Tuple.vector(2.0, 3.0, 4.0)
+
+        val cross3d = vec1.crossProduct3d(vec2)
+        val cross3dReverse = vec2.crossProduct3d(vec1)
+
+        assertEquals(Tuple.vector(-1.0, 2.0, -1.0), cross3d)
+        assertEquals(Tuple.vector(1.0, -2.0, 1.0), cross3dReverse)
     }
 }

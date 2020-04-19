@@ -72,6 +72,12 @@ Feature: Tuples
     Then magnitude(v) = 1
 
   Scenario: Calculate magnitude of ordinary vector
-    Given "v" <- vectore(1.0, 2.0, 3.0)
+    Given "v" <- vector(1.0, 2.0, 3.0)
     # checking with precision 0.00001
     Then magnitude(v) = 3.7416573
+
+  Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
+    Given "v" <- vector(4.0, 0.0, 0.0)
+    Then normalize(v) = vector(1.0, 1.0, 1.0)
+
+  # dot and cross product implemented only as unit tests

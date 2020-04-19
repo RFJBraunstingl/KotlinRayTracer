@@ -10,7 +10,7 @@ class VectorSteps(
 
     @Given("{string} <- vector\\({double}, {double}, {double})")
     fun createVectorTuple(name: String, x: Double, y: Double, z: Double) {
-        val vectorTuple = Tuple.createVector(x, y, z)
+        val vectorTuple = Tuple.vector(x, y, z)
         tupleStore.save(name, vectorTuple)
     }
 }

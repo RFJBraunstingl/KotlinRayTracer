@@ -20,13 +20,13 @@ data class Tuple(
                 w: Double
         ): Tuple = Tuple(x, y, z, w)
 
-        fun createPoint(
+        fun point(
                 x: Double,
                 y: Double,
                 z: Double
         ): Tuple = Tuple(x, y, z, 1.0)
 
-        fun createVector(
+        fun vector(
                 x: Double,
                 y: Double,
                 z: Double
@@ -78,5 +78,25 @@ data class Tuple(
     fun magnitude(): Double {
         val sumOfCubes = x * x + y * y + z * z + w * w
         return sqrt(sumOfCubes)
+    }
+
+    fun normalize(): Tuple {
+        val magnitude = magnitude()
+        return dividedBy(magnitude)
+    }
+
+    fun dotProduct(other: Tuple): Double {
+        return x * other.x +
+                y * other.y +
+                z * other.z +
+                w * other.w
+    }
+
+    fun crossProduct3d(other: Tuple): Tuple {
+        return vector(
+                y * other.z - z * other.y,
+                z * other.x - x * other.z,
+                x * other.y - y * other.x
+        )
     }
 }

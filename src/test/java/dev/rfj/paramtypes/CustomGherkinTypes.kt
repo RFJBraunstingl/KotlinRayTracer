@@ -23,7 +23,7 @@ class CustomGherkinTypes(
 
     @ParameterType("vector\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun vector(x: String, y: String, z: String): Tuple {
-        return Tuple.createVector(
+        return Tuple.vector(
                 x.toDouble(),
                 y.toDouble(),
                 z.toDouble()
@@ -32,7 +32,7 @@ class CustomGherkinTypes(
 
     @ParameterType("point\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun point(x: String, y: String, z: String): Tuple {
-        return Tuple.createPoint(
+        return Tuple.point(
                 x.toDouble(),
                 y.toDouble(),
                 z.toDouble()
