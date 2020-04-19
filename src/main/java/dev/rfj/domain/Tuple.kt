@@ -34,4 +34,20 @@ data class Tuple(
     fun isVector(): Boolean = (w == 0.0)
 
     fun isPoint(): Boolean = !isVector()
+
+    fun plus(add: Tuple) =
+            create(
+                    x + add.x,
+                    y + add.y,
+                    z + add.z,
+                    w + add.w
+            )
+
+    fun minus(sub: Tuple) =
+            create(
+                    x - sub.x,
+                    y - sub.y,
+                    z - sub.z,
+                    w - sub.w
+            )
 }
