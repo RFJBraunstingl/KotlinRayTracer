@@ -69,4 +69,12 @@ class TupleTests {
         val expect = Tuple.create(3.5, -7.0, 10.5, -14.0)
         assertEquals(expect, aTuple.multipliedBy(aScalar))
     }
+
+    @Test
+    fun testScalarDivision() {
+        val aTuple = Tuple.create(1.0, -2.0, 3.0, -4.0)
+        val halfed = Tuple.create(0.5, -1.0, 1.5, -2.0)
+
+        assertEquals(halfed, aTuple.dividedBy(2.0))
+    }
 }

@@ -65,4 +65,4 @@ Feature: Tuples
 
   Scenario: Dividing a tuple by a scalar
     Given "a" <- tuple(1.0, -2.0, 3.0, -4.0)
-    Then a / 2 = tuple(0.5, -1.0, 1.5, -2.0)
+    Then a / 2.0 = tuple(0.5, -1.0, 1.5, -2.0)

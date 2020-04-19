@@ -63,4 +63,13 @@ data class Tuple(
                 w * scalar
         )
     }
+
+    fun dividedBy(scalar: Double): Tuple {
+        return create(
+                x / scalar,
+                y / scalar,
+                z / scalar,
+                w / scalar
+        )
+    }
 }

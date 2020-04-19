@@ -1,12 +1,14 @@
 package dev.rfj.steps
 
 import dev.rfj.domain.Tuple
+import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Then
-import sun.security.util.PendingException
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class TupleArithmeticSteps {
+class TupleArithmeticSteps(
+        private val tupleStore: TupleStore
+) {
 
     @Then("{tupleName} + {tupleName} = {tuple}")
     fun validateTupleAddition(addend: Tuple, augend: Tuple, result: Tuple) {
@@ -32,8 +34,16 @@ class TupleArithmeticSteps {
         assertEquals(expected, tuple.multipliedBy(scalar));
     }
 
-    @Then("{tupleName} / {double} = {tuple}")
-    fun verifyScalarDivision(tuple: Tuple, scalar: Double, expected: Tuple) {
-        throw PendingException()
+    @Then("^([a-zA-Z0-9]+) \\/ ([0-9]+\\.[0-9]+) = tuple\\((-?[0-9]+\\.[0-9]+), (-?[0-9]+\\.[0-9]+), (-?[0-9]+\\.[0-9]+), (-?[0-9]+\\.[0-9]+)\\)$")
+    fun aTuple(tupleName: String, scalar: Double, x: String, y: String, z: String, w: String) {
+        val actual = tupleStore.findByName(tupleName)
+        val expected = Tuple.create(
+                x.toDouble(),
+                y.toDouble(),
+                z.toDouble(),
+                w.toDouble()
+        )
+
+        assertEquals(expected, actual.dividedBy(scalar))
     }
 }
