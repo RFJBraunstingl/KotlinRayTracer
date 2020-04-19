@@ -35,3 +35,14 @@ Feature: Tuples
     Given "p1" <- point(3.0, 2.0, 1.0)
     And "p2" <- point(5.0, 6.0, 7.0)
     Then p1 - p2 = vector(-2.0, -4.0, -6.0)
+
+  Scenario: Substracting a vector from a point
+    Given "p" <- point(3.0, 2.0, 1.0)
+    And "v" <- vector(5.0, 6.0, 7.0)
+    Then p - v = point(-2.0, -4.0, -6.0)
+
+  Scenario: Substracting two vectors
+    Given "v1" <- vector(3.0, 2.0, 1.0)
+    And "v2" <- vector(5.0, 6.0, 7.0)
+    Then v1 - v2 = vector(-2.0, -4.0, -6.0)
+
