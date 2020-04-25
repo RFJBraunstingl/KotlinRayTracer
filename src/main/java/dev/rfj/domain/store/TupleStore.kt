@@ -1,6 +1,6 @@
 package dev.rfj.domain.store
 
-import dev.rfj.domain.Tuple
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.exception.TupleNotFoundException
 
 class TupleStore {

@@ -1,5 +1,6 @@
 package dev.rfj.domain
 
+import dev.rfj.domain.tuple.Tuple
 import org.junit.Assert
 import org.junit.jupiter.api.Test
 import kotlin.math.sqrt

@@ -1,10 +1,11 @@
 package dev.rfj.steps
 
-import dev.rfj.domain.Tuple
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ColorSteps(
         private val tupleStore: TupleStore
@@ -29,5 +30,11 @@ class ColorSteps(
     @Then("{tupleName}.blue = {double}")
     fun validateBlueValue(color: Tuple, blue: Double) {
         assertEquals(blue, color.z)
+    }
+
+    @Then("{tupleName} + {tupleName} = {color}")
+    fun additionOfColors(tuple1: Tuple, tuple2: Tuple, result: Tuple) {
+        val actualResult = tuple1.plus(tuple2)
+        assertEquals(result, actualResult)
     }
 }

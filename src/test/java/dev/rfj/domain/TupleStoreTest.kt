@@ -2,6 +2,7 @@ package dev.rfj.domain
 
 import dev.rfj.domain.store.TupleStore
 import dev.rfj.domain.store.exception.TupleNotFoundException
+import dev.rfj.domain.tuple.Tuple
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

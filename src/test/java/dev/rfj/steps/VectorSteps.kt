@@ -1,6 +1,6 @@
 package dev.rfj.steps
 
-import dev.rfj.domain.Tuple
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Given
 

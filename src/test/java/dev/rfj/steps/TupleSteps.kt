@@ -1,6 +1,6 @@
 package dev.rfj.steps
 
-import dev.rfj.domain.Tuple
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -42,6 +42,7 @@ class TupleSteps(
         when (type) {
             "point" -> assertTrue { tuple.isPoint() }
             "vector" -> assertTrue { tuple.isVector() }
+            "color" -> assertTrue { tuple.isColor() }
             else -> throw RuntimeException("I do not know how to verify this")
         }
     }

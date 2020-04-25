@@ -1,6 +1,6 @@
 package dev.rfj.paramtypes
 
-import dev.rfj.domain.Tuple
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import io.cucumber.java.ParameterType
 
@@ -36,6 +36,15 @@ class CustomGherkinTypes(
                 x.toDouble(),
                 y.toDouble(),
                 z.toDouble()
+        )
+    }
+
+    @ParameterType("color\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
+    fun color(red: String, green: String, blue: String): Tuple {
+        return Tuple.color(
+                red.toDouble(),
+                green.toDouble(),
+                blue.toDouble()
         )
     }
 }

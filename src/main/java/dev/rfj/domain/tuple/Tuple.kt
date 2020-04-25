@@ -1,17 +1,17 @@
-package dev.rfj.domain
+package dev.rfj.domain.tuple
 
 import kotlin.math.sqrt
 
-data class Tuple(
-        val x: Double,
-        val y: Double,
-        val z: Double,
-        val w: Double
+open class Tuple(
+        open val x: Double,
+        open val y: Double,
+        open val z: Double,
+        open val w: Double
 ) {
 
     companion object {
 
-        val ZERO_VECTOR = Tuple(0.0, 0.0, 0.0, 0.0)
+        val ZERO_VECTOR = vector(0.0, 0.0, 0.0)
 
         fun create(
                 x: Double,
@@ -24,24 +24,26 @@ data class Tuple(
                 x: Double,
                 y: Double,
                 z: Double
-        ): Tuple = Tuple(x, y, z, 1.0)
+        ): Tuple = Point(x, y, z)
 
         fun vector(
                 x: Double,
                 y: Double,
                 z: Double
-        ): Tuple = Tuple(x, y, z, 0.0)
+        ): Tuple = Vector(x, y, z)
 
         fun color(
                 red: Double,
                 green: Double,
                 blue: Double
-        ): Tuple = Tuple(red, green, blue, -1.0)
+        ): Tuple = Color(red, green, blue)
     }
 
     fun isVector(): Boolean = (w == 0.0)
 
-    fun isPoint(): Boolean = !isVector()
+    fun isPoint(): Boolean = (w == 1.0)
+
+    fun isColor(): Boolean = this is Color
 
     fun plus(add: Tuple) =
             create(
@@ -104,5 +106,31 @@ data class Tuple(
                 z * other.x - x * other.z,
                 x * other.y - y * other.x
         )
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+
+        if (!(other is Tuple))
+            return false
+
+        if (x != other.x) return false
+        if (y != other.y) return false
+        if (z != other.z) return false
+        if (w != other.w) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + z.hashCode()
+        result = 31 * result + w.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Tuple(x=$x, y=$y, z=$z, w=$w)"
     }
 }
