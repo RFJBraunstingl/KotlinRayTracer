@@ -2,6 +2,8 @@ package dev.rfj.canvas
 
 import dev.rfj.domain.tuple.Color
 import dev.rfj.domain.tuple.Tuple
+import dev.rfj.output.PPM
+import dev.rfj.output.canvasToPPM
 
 class Canvas(
         val width: Int,
@@ -40,5 +42,9 @@ class Canvas(
 
     fun getPixelAt(x: Int, y: Int): Color {
         return grid[y][x]
+    }
+
+    fun toPPM(): PPM {
+        return canvasToPPM(this)
     }
 }
