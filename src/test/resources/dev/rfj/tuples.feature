@@ -78,6 +78,6 @@ Feature: Tuples
 
   Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
     Given "v" <- vector(4.0, 0.0, 0.0)
-    Then normalize(v) = vector(1.0, 1.0, 1.0)
+    Then normalize(v) = vector(1.0, 0.0, 0.0)
 
   # dot and cross product implemented only as unit tests

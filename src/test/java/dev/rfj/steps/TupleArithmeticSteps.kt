@@ -53,4 +53,9 @@ class TupleArithmeticSteps(
         val delta = 0.00001
         Assert.assertEquals(magnitude, tuple.magnitude(), delta)
     }
+
+    @Then("normalize\\({tupleName}) = {vector}")
+    fun verifyNormal(vector: Tuple, normal: Tuple) {
+        assertEquals(normal, vector.normalize())
+    }
 }
