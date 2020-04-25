@@ -1,6 +1,9 @@
 package dev.rfj.domain.tuple
 
+import kotlin.math.abs
 import kotlin.math.sqrt
+
+fun Double.equalsWithDelta(other: Double, delta: Double) = abs(this - other) < delta
 
 open class Tuple(
         open val x: Double,
@@ -111,13 +114,14 @@ open class Tuple(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
 
-        if (!(other is Tuple))
+        if (other !is Tuple)
             return false
 
-        if (x != other.x) return false
-        if (y != other.y) return false
-        if (z != other.z) return false
-        if (w != other.w) return false
+        val delta = 0.00001
+        if (!x.equalsWithDelta(other.x, delta)) return false
+        if (!y.equalsWithDelta(other.y, delta)) return false
+        if (!z.equalsWithDelta(other.z, delta)) return false
+        if (!w.equalsWithDelta(other.w, delta)) return false
 
         return true
     }

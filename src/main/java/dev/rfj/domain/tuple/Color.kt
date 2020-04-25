@@ -1,6 +1,6 @@
 package dev.rfj.domain.tuple
 
-data class Color(
+class Color(
         val red: Double,
         val green: Double,
         val blue: Double

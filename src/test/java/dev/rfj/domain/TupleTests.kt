@@ -147,4 +147,12 @@ class TupleTests {
         assertEquals(Tuple.vector(-1.0, 2.0, -1.0), cross3d)
         assertEquals(Tuple.vector(1.0, -2.0, 1.0), cross3dReverse)
     }
+
+    @Test
+    fun testFloatComparison() {
+        val a = Tuple.create(0.2, 0.5, 0.5, 0.0)
+        val b = Tuple.create(0.20000000000000007, 0.5, 0.5, 0.0)
+
+        assertEquals(a, b)
+    }
 }

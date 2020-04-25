@@ -37,4 +37,10 @@ class ColorSteps(
         val actualResult = tuple1.plus(tuple2)
         assertEquals(result, actualResult)
     }
+
+    @Then("{tupleName} - {tupleName} = {color}")
+    fun substractionResultsInColor(tuple1: Tuple, tuple2: Tuple, result: Tuple) {
+        val actualResult = tuple1.minus(tuple2)
+        assertEquals(result, actualResult)
+    }
 }
