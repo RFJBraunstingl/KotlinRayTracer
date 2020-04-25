@@ -43,4 +43,9 @@ class ColorSteps(
         val actualResult = tuple1.minus(tuple2)
         assertEquals(result, actualResult)
     }
+
+    @Then("{tupleName} * {tupleName} = {color}")
+    fun multiplyColors(color1: Tuple, color2: Tuple, product: Tuple) {
+        assertEquals(product, color1.multipliedBy(color2))
+    }
 }

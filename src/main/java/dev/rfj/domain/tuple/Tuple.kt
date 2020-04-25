@@ -77,6 +77,15 @@ open class Tuple(
         )
     }
 
+    fun multipliedBy(other: Tuple): Tuple {
+        return create(
+                x * other.x,
+                y * other.y,
+                z * other.z,
+                w * other.w
+        )
+    }
+
     fun dividedBy(scalar: Double): Tuple {
         return create(
                 x / scalar,
