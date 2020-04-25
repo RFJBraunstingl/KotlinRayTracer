@@ -39,7 +39,7 @@ open class Tuple(
                 red: Double,
                 green: Double,
                 blue: Double
-        ): Tuple = Color(red, green, blue)
+        ): Color = Color(red, green, blue)
     }
 
     fun isVector(): Boolean = (w == 0.0)

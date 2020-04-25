@@ -1,18 +1,17 @@
 package dev.rfj.steps
 
-import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
+import dev.rfj.domain.tuple.Tuple
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class ColorSteps(
         private val tupleStore: TupleStore
 ) {
 
     @Given("{string} <- color\\({double}, {double}, {double})")
-    fun createVectorTuple(name: String, red: Double, green: Double, blue: Double) {
+    fun createColorTuple(name: String, red: Double, green: Double, blue: Double) {
         val colorTuple = Tuple.color(red, green, blue)
         tupleStore.save(name, colorTuple)
     }
