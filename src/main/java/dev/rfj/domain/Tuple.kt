@@ -31,6 +31,12 @@ data class Tuple(
                 y: Double,
                 z: Double
         ): Tuple = Tuple(x, y, z, 0.0)
+
+        fun color(
+                red: Double,
+                green: Double,
+                blue: Double
+        ): Tuple = Tuple(red, green, blue, -1.0)
     }
 
     fun isVector(): Boolean = (w == 0.0)
