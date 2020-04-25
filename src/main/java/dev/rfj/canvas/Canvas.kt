@@ -4,6 +4,8 @@ import dev.rfj.domain.tuple.Color
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.output.PPM
 import dev.rfj.output.canvasToPPM
+import java.io.File
+import java.io.FileWriter
 
 class Canvas(
         val width: Int,
@@ -46,5 +48,11 @@ class Canvas(
 
     fun toPPM(): PPM {
         return canvasToPPM(this)
+    }
+
+    fun setBackgroundColor(color: Color) {
+        for (x in 0 until width)
+            for (y in 0 until height)
+                setPixelAt(x, y, color)
     }
 }
