@@ -3,6 +3,7 @@ package dev.rfj
 import dev.rfj.canvas.Canvas
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.output.canvasToPPM
+import dev.rfj.output.dumpToFile
 
 fun main() {
     val canvas = Canvas(500, 500)
