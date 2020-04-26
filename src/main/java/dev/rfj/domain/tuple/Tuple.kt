@@ -1,9 +1,7 @@
 package dev.rfj.domain.tuple
 
-import kotlin.math.abs
+import dev.rfj.util.equalsWithDelta
 import kotlin.math.sqrt
-
-fun Double.equalsWithDelta(other: Double, delta: Double) = abs(this - other) < delta
 
 open class Tuple(
         open val x: Double,

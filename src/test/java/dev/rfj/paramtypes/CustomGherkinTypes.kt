@@ -1,16 +1,19 @@
 package dev.rfj.paramtypes
 
 import dev.rfj.canvas.Canvas
+import dev.rfj.domain.MatrixMap
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import dev.rfj.domain.tuple.Color
+import dev.rfj.matrix.Matrix4x4
 import dev.rfj.steps.canvas.CanvasMap
 import io.cucumber.java.ParameterType
 import kotlin.test.fail
 
 class CustomGherkinTypes(
         private val tupleStore: TupleStore,
-        private val canvasMap: CanvasMap
+        private val canvasMap: CanvasMap,
+        private val matrixMap: MatrixMap
 ) {
 
     @ParameterType("([a-zA-Z0-9]+)")
@@ -26,6 +29,11 @@ class CustomGherkinTypes(
     @ParameterType("([a-zA-Z0-9]+)")
     fun canvasName(name: String): Canvas {
         return canvasMap[name] ?: fail("Could not find Canvas with name $name!")
+    }
+
+    @ParameterType("([a-zA-Z0-9]+)")
+    fun matrixName(name: String): Matrix4x4 {
+        return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }
 
     @ParameterType("([a-zA-Z0-9]+)")
