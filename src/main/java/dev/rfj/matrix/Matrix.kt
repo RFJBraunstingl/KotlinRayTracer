@@ -1,5 +1,7 @@
 package dev.rfj.matrix
 
+import dev.rfj.util.equalsWithDelta
+
 class Matrix(
         val numOfRows: Int,
         val numOfColumns: Int
@@ -32,5 +34,31 @@ class Matrix(
 
     override fun toString(): String {
         return "Matrix(values=$values)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Matrix
+
+        if (numOfRows != other.numOfRows) return false
+        if (numOfColumns != other.numOfColumns) return false
+
+        for (row in 0 until numOfRows) {
+            for (col in 0 until numOfColumns) {
+                if (!getValueAt(row, col).equalsWithDelta(other.getValueAt(row, col)))
+                    return false
+            }
+        }
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = numOfRows
+        result = 31 * result + numOfColumns
+        result = 31 * result + values.hashCode()
+        return result
     }
 }

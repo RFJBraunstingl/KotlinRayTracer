@@ -13,3 +13,61 @@ Feature: Matrices
     And M[2,2] = 11
     And M[3,0] = 13.5
     And M[3,2] = 15.5
+
+  Scenario: A 2x2 matrix ought to be representable
+    Given the following 2x2 matrix M:
+      | -3 |  5 |
+      |  1 | -2 |
+    Then M[0,0] = -3
+    And M[0,1] = 5
+    And M[1,0] = 1
+    And M[1,1] = -2
+
+  Scenario: A 3x3 matrix ought to be representable
+    Given the following 3x3 matrix M:
+      | -3 |  5 |  0 |
+      |  1 | -2 | -7 |
+      |  0 |  1 |  1 |
+    Then M[0,0] = -3
+    And M[1,1] = -2
+    And M[2,2] = 1
+
+  Scenario: Matrix equality with identical matrices
+    Given the following matrix A:
+      | 1 | 2 | 3 | 4 |
+      | 5 | 6 | 7 | 8 |
+      | 9 | 8 | 7 | 6 |
+      | 5 | 4 | 3 | 2 |
+    And the following matrix B:
+      | 1 | 2 | 3 | 4 |
+      | 5 | 6 | 7 | 8 |
+      | 9 | 8 | 7 | 6 |
+      | 5 | 4 | 3 | 2 |
+    Then A = B
+
+  # we are using a delta comparison
+  Scenario: Matrix equality with practically identical matrices
+    Given the following matrix A:
+      | 1 | 2.0000002 | 3 | 4 |
+      | 5 | 6 | 7 | 8.0000004 |
+      | 9 | 8 | 7 | 6 |
+      | 5 | 4 | 3 | 2 |
+    And the following matrix B:
+      | 1 | 2 | 3 | 4 |
+      | 5 | 6.0000008 | 7 | 8 |
+      | 9 | 8 | 7 | 6 |
+      | 5 | 4 | 3 | 2 |
+    Then A = B
+
+  Scenario: Matrix equality with different matrices
+    Given the following matrix A:
+      | 1 | 2 | 3 | 4 |
+      | 5 | 6 | 7 | 8 |
+      | 9 | 8 | 7 | 6 |
+      | 5 | 4 | 3 | 2 |
+    And the following matrix B:
+      | 2 | 3 | 4 | 5 |
+      | 6 | 7 | 8 | 9 |
+      | 8 | 7 | 6 | 5 |
+      | 4 | 3 | 2 | 1 |
+    Then A != B
