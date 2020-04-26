@@ -31,6 +31,14 @@ class MatrixSteps(
         matrixMap[name] = matrix
     }
 
+    @Given("{name} ← transpose\\({matrixName})")
+    fun givenTranspositionOfMatrix(
+            name: String,
+            matrix: Matrix
+    ) {
+        matrixMap[name] = matrix.transpose()
+    }
+
     @Then("{matrixName}[{int},{int}] = {double}")
     fun validateMatrixValue(matrix: Matrix, row: Int, col: Int, value: Double) {
         val valueFromMatrix = matrix.getValueAt(row, col)
@@ -82,12 +90,11 @@ class MatrixSteps(
         assertEquals(product, matrix.multipliedBy(tuple))
     }
 
-/*    @Then("{matrixName} * identity_matrix = {matrixName}")
-    fun validateIdentityMatrixMultiplication(
+    @Then("transpose\\({matrixName}) is the following matrix:")
+    fun validateMatrixTransposition(
             input: Matrix,
             output: Matrix
     ) {
-        val identityMatrix = Matrix.identity4x4()
-        assertEquals(output, input.multipliedBy(identityMatrix))
-    }*/
+        assertEquals(output, input.transpose())
+    }
 }
