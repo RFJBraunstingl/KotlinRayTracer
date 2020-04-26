@@ -64,6 +64,15 @@ class MatrixSteps(
         assertEquals(product, matrix1.multipliedBy(matrix2))
     }
 
+    @Then("{matrixName} * {matrixName} = {matrixName}")
+    fun validateMatrixMultiplication(
+            matrix1: Matrix,
+            matrix2: Matrix,
+            product: Matrix
+    ) {
+        assertEquals(product, matrix1.multipliedBy(matrix2))
+    }
+
     @Then("{matrixName} * {tupleName} = {tuple}")
     fun validateMatrixTupleMultiplication(
             matrix: Matrix,
@@ -72,4 +81,13 @@ class MatrixSteps(
     ) {
         assertEquals(product, matrix.multipliedBy(tuple))
     }
+
+/*    @Then("{matrixName} * identity_matrix = {matrixName}")
+    fun validateIdentityMatrixMultiplication(
+            input: Matrix,
+            output: Matrix
+    ) {
+        val identityMatrix = Matrix.identity4x4()
+        assertEquals(output, input.multipliedBy(identityMatrix))
+    }*/
 }

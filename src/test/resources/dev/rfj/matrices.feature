@@ -97,3 +97,15 @@ Feature: Matrices
       | 0 | 0 | 0 | 1 |
     And "b" <- tuple(1, 2, 3, 1)
     Then A * b = tuple(18.0, 24.0, 33.0, 1.0)
+
+  Scenario: Multiplying a matrix by the identity matrix
+    Given the following matrix A:
+      | 0 | 1 |  2 |  4 |
+      | 1 | 2 |  4 |  8 |
+      | 2 | 4 |  8 | 16 |
+      | 4 | 8 | 16 | 32 |
+    Then A * identity_matrix = A
+
+  Scenario: Multiplying the identity matrix by a tuple
+    Given "a" <- tuple(1.0, 2.0, 3.0, 4.0)
+    Then identity_matrix * a = tuple(1.0, 2.0, 3.0, 4.0)

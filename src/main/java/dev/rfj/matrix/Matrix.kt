@@ -10,6 +10,26 @@ class Matrix(
 
     private val values = createValueMatrix()
 
+    companion object {
+
+        fun identity4x4(): Matrix {
+            /*
+            | 1 | 0 | 0 | 0 |
+            | 0 | 1 | 0 | 0 |
+            | 0 | 0 | 1 | 0 |
+            | 0 | 0 | 0 | 1 |
+            */
+            val identity = Matrix(4, 4)
+
+            identity.setValueAt(0, 0, 1.0)
+            identity.setValueAt(1, 1, 1.0)
+            identity.setValueAt(2, 2, 1.0)
+            identity.setValueAt(3, 3, 1.0)
+
+            return identity
+        }
+    }
+
     private fun createValueMatrix(): MutableList<MutableList<Double>> {
         val rows = mutableListOf<MutableList<Double>>()
 

@@ -32,8 +32,11 @@ class CustomGherkinTypes(
     }
 
     // matrices must be named with capital letters
-    @ParameterType("([A-Z0-9]+)")
+    @ParameterType("([A-Z0-9]+|(identity_matrix))")
     fun matrixName(name: String): Matrix {
+        if ("identity_matrix" == name)
+            return Matrix.identity4x4()
+
         return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }
 
