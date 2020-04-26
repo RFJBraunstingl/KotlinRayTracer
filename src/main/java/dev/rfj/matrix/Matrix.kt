@@ -148,4 +148,44 @@ class Matrix(
 
         return result
     }
+
+    fun determinant(): Double {
+        if (is2x2Matrix())
+            return values[0][0] * values[1][1] - values[0][1] * values[1][0]
+
+        throw UnsupportedOperationException("I do not know how to do that")
+    }
+
+    fun is2x2Matrix(): Boolean =
+            numOfRows == 2 && numOfColumns == 2
+
+    fun submatrix(rowToDrop: Int, colToDrop: Int): Matrix {
+        val result = Matrix(
+                numOfRows - 1,
+                numOfColumns - 1
+        )
+
+        var newRow = 0
+        var newCol = 0
+
+        for (row in 0 until numOfRows) {
+            if (row == rowToDrop)
+                continue
+
+            newCol = 0
+            for (col in 0 until numOfColumns) {
+                if (col == colToDrop)
+                    continue
+
+                val value = getValueAt(row, col)
+                result.setValueAt(newRow, newCol, value)
+
+                newCol++
+            }
+
+            newRow++
+        }
+
+        return result
+    }
 }

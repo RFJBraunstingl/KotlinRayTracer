@@ -97,4 +97,25 @@ class MatrixSteps(
     ) {
         assertEquals(output, input.transpose())
     }
+
+    @Then("determinant\\({matrixName}) = {double}")
+    fun validateDeterminantForMatrix(
+            matrix: Matrix,
+            determinant: Double
+    ) {
+        determinant.equalsWithDelta(matrix.determinant())
+    }
+
+    @Then("submatrix\\({matrixName}, {int}, {int}) is the following {int}x{int} matrix:")
+    fun validateSubmatrix(
+            input: Matrix,
+            rowToRemove: Int,
+            colToRemove: Int,
+            expectedRows: Int,
+            expectedColumns: Int,
+            expected: Matrix
+    ) {
+        assertEquals(expected, input.submatrix(rowToRemove, colToRemove))
+    }
+
 }
