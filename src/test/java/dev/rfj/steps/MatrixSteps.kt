@@ -138,4 +138,14 @@ class MatrixSteps(
     ) {
         expected.equalsWithDelta(matrix.minor(row, col))
     }
+
+    @Then("cofactor\\({matrixName}, {int}, {int}) = {double}")
+    fun validateCofactor(
+            matrix: Matrix,
+            row: Int,
+            col: Int,
+            expected: Double
+    ) {
+        expected.equalsWithDelta(matrix.cofactor(row, col))
+    }
 }

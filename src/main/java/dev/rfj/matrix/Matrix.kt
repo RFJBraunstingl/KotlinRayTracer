@@ -153,8 +153,19 @@ class Matrix(
         if (is2x2Matrix())
             return values[0][0] * values[1][1] - values[0][1] * values[1][0]
 
+        if (isSymmetricMatrix()) {
+            // calculate the determinant using hte first row
+            var determinant = 0.0
+            for (col in 0 until numOfColumns) {
+                determinant += values[0][col] * cofactor(0, col)
+            }
+            return determinant
+        }
+
         throw UnsupportedOperationException("I do not know how to do that")
     }
+
+    private fun isSymmetricMatrix(): Boolean = numOfRows == numOfColumns
 
     fun is2x2Matrix(): Boolean =
             numOfRows == 2 && numOfColumns == 2
@@ -191,5 +202,15 @@ class Matrix(
 
     fun minor(row: Int, col: Int): Double {
         return submatrix(row, col).determinant()
+    }
+
+    fun cofactor(row: Int, col: Int): Double {
+        val cofactor = minor(row, col)
+
+        // if row + col is an odd number, change sign
+        if ((row + col) % 2 != 0)
+            return cofactor * -1;
+
+        return cofactor
     }
 }
