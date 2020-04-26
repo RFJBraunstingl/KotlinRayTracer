@@ -4,7 +4,7 @@ import dev.rfj.matrix.Matrix
 import io.cucumber.datatable.DataTable
 import io.cucumber.datatable.TableTransformer
 
-class Matrix4x4Transformer: TableTransformer<Matrix> {
+class MatrixTransformer: TableTransformer<Matrix> {
 
     override fun transform(dataTable: DataTable): Matrix {
         val listOfListOfStrings = dataTable.asLists()

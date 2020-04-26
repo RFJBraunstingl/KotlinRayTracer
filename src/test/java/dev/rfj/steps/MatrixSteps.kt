@@ -1,6 +1,7 @@
 package dev.rfj.steps
 
 import dev.rfj.domain.MatrixMap
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
 import io.cucumber.java.en.Given
@@ -61,5 +62,14 @@ class MatrixSteps(
             product: Matrix
     ) {
         assertEquals(product, matrix1.multipliedBy(matrix2))
+    }
+
+    @Then("{matrixName} * {tupleName} = {tuple}")
+    fun validateMatrixTupleMultiplication(
+            matrix: Matrix,
+            tuple: Tuple,
+            product: Tuple
+    ) {
+        assertEquals(product, matrix.multipliedBy(tuple))
     }
 }

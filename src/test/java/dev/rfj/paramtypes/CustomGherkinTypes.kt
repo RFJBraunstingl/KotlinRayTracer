@@ -31,7 +31,8 @@ class CustomGherkinTypes(
         return canvasMap[name] ?: fail("Could not find Canvas with name $name!")
     }
 
-    @ParameterType("([a-zA-Z0-9]+)")
+    // matrices must be named with capital letters
+    @ParameterType("([A-Z0-9]+)")
     fun matrixName(name: String): Matrix {
         return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }

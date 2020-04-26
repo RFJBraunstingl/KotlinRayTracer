@@ -9,7 +9,7 @@ class MatrixRegistryConfigurer: TypeRegistryConfigurer {
 
     override fun configureTypeRegistry(registry: TypeRegistry) {
         registry.defineDataTableType(
-                DataTableType(Matrix::class.java, Matrix4x4Transformer())
+                DataTableType(Matrix::class.java, MatrixTransformer())
         )
     }
 }

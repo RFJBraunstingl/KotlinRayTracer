@@ -1,5 +1,6 @@
 package dev.rfj.matrix
 
+import dev.rfj.domain.tuple.Tuple
 import dev.rfj.util.equalsWithDelta
 
 class Matrix(
@@ -78,5 +79,40 @@ class Matrix(
         }
 
         return result
+    }
+
+    fun multipliedBy(other: Tuple): Tuple {
+        assert(numOfRows == 4) { "tuple multiplication is only supported for 4d matrices" }
+
+        val newX =
+                values[0][0] * other.x +
+                values[0][1] * other.y +
+                values[0][2] * other.z +
+                values[0][3] * other.w
+
+        val newY =
+                values[1][0] * other.x +
+                values[1][1] * other.y +
+                values[1][2] * other.z +
+                values[1][3] * other.w
+
+        val newZ =
+                values[2][0] * other.x +
+                values[2][1] * other.y +
+                values[2][2] * other.z +
+                values[2][3] * other.w
+
+        val newW =
+                values[3][0] * other.x +
+                values[3][1] * other.y +
+                values[3][2] * other.z +
+                values[3][3] * other.w
+
+        return Tuple.create(
+                newX,
+                newY,
+                newZ,
+                newW
+        )
     }
 }
