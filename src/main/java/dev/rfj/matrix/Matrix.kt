@@ -29,6 +29,16 @@ class Matrix(
 
             return identity
         }
+
+        fun translation(x: Double, y: Double, z: Double): Matrix {
+            val result = identity4x4()
+
+            result.setValueAt(0, 3, x)
+            result.setValueAt(1, 3, y)
+            result.setValueAt(2, 3, z)
+
+            return result
+        }
     }
 
     private fun createValueMatrix(): MutableList<MutableList<Double>> {

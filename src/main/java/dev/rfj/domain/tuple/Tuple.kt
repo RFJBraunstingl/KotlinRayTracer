@@ -140,11 +140,10 @@ open class Tuple(
         if (other !is Tuple)
             return false
 
-        val delta = 0.00001
-        if (!x.equalsWithDelta(other.x, delta)) return false
-        if (!y.equalsWithDelta(other.y, delta)) return false
-        if (!z.equalsWithDelta(other.z, delta)) return false
-        if (!w.equalsWithDelta(other.w, delta)) return false
+        if (!x.equalsWithDelta(other.x)) return false
+        if (!y.equalsWithDelta(other.y)) return false
+        if (!z.equalsWithDelta(other.z)) return false
+        if (!w.equalsWithDelta(other.w)) return false
 
         return true
     }
