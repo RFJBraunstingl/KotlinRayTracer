@@ -51,4 +51,15 @@ class MatrixSteps(
     ) {
         assertNotEquals(matrix1, matrix2)
     }
+
+    @Then("{matrixName} * {matrixName} is the following {int}x{int} matrix:")
+    fun validateMatrixMultiplication(
+            matrix1: Matrix,
+            matrix2: Matrix,
+            numOfRowsOfProduct: Int,
+            numOfColumnsOfProduct: Int,
+            product: Matrix
+    ) {
+        assertEquals(product, matrix1.multipliedBy(matrix2))
+    }
 }

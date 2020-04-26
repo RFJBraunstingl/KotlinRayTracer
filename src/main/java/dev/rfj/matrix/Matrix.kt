@@ -61,4 +61,22 @@ class Matrix(
         result = 31 * result + values.hashCode()
         return result
     }
+
+    fun multipliedBy(other: Matrix): Matrix {
+        val result = Matrix(numOfRows, numOfColumns)
+
+        for (row in 0 until numOfRows) {
+            for (col in 0 until numOfColumns) {
+                val value =
+                        getValueAt(row, 0) * other.getValueAt(0, col) +
+                        getValueAt(row, 1) * other.getValueAt(1, col) +
+                        getValueAt(row, 2) * other.getValueAt(2, col) +
+                        getValueAt(row, 3) * other.getValueAt(3, col)
+
+                result.setValueAt(row, col, value)
+            }
+        }
+
+        return result
+    }
 }
