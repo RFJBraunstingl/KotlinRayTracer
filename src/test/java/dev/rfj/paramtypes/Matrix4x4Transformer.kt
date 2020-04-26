@@ -1,19 +1,22 @@
 package dev.rfj.paramtypes
 
-import dev.rfj.matrix.Matrix4x4
+import dev.rfj.matrix.Matrix
 import io.cucumber.datatable.DataTable
 import io.cucumber.datatable.TableTransformer
 
-class Matrix4x4Transformer: TableTransformer<Matrix4x4> {
+class Matrix4x4Transformer: TableTransformer<Matrix> {
 
-    override fun transform(dataTable: DataTable): Matrix4x4 {
-        val result = Matrix4x4()
+    override fun transform(dataTable: DataTable): Matrix {
         val listOfListOfStrings = dataTable.asLists()
+        val numOfRows = listOfListOfStrings.size
+        val numOfColumns = listOfListOfStrings[0].size
 
-        for (row in 0 until listOfListOfStrings.size) {
+        val result = Matrix(numOfRows, numOfColumns)
+
+        for (row in 0 until numOfRows) {
             val rowAsStrings = listOfListOfStrings[row]
 
-            for (col in 0 until rowAsStrings.size) {
+            for (col in 0 until numOfColumns) {
                 val value = rowAsStrings[col].toDouble()
                 result.setValueAt(row, col, value)
             }

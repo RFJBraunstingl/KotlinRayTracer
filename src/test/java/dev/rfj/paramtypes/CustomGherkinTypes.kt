@@ -5,7 +5,7 @@ import dev.rfj.domain.MatrixMap
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import dev.rfj.domain.tuple.Color
-import dev.rfj.matrix.Matrix4x4
+import dev.rfj.matrix.Matrix
 import dev.rfj.steps.canvas.CanvasMap
 import io.cucumber.java.ParameterType
 import kotlin.test.fail
@@ -32,7 +32,7 @@ class CustomGherkinTypes(
     }
 
     @ParameterType("([a-zA-Z0-9]+)")
-    fun matrixName(name: String): Matrix4x4 {
+    fun matrixName(name: String): Matrix {
         return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }
 

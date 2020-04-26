@@ -1,16 +1,19 @@
 package dev.rfj.matrix
 
-class Matrix4x4 {
+class Matrix(
+        val numOfRows: Int,
+        val numOfColumns: Int
+) {
 
     private val values = createValueMatrix()
 
     private fun createValueMatrix(): MutableList<MutableList<Double>> {
         val rows = mutableListOf<MutableList<Double>>()
 
-        for (i in 0..3) {
+        for (i in 0 until numOfRows) {
             val row = mutableListOf<Double>()
 
-            for (j in 0..3)
+            for (j in 0 until numOfColumns)
                 row.add(0.0)
 
             rows.add(row)
@@ -28,6 +31,6 @@ class Matrix4x4 {
     }
 
     override fun toString(): String {
-        return "Matrix4x4(values=$values)"
+        return "Matrix(values=$values)"
     }
 }
