@@ -27,13 +27,13 @@ open class Tuple(
                 x: Double,
                 y: Double,
                 z: Double
-        ): Tuple = Point(x, y, z)
+        ): Point = Point(x, y, z)
 
         fun vector(
                 x: Double,
                 y: Double,
                 z: Double
-        ): Tuple = Vector(x, y, z)
+        ): Vector = Vector(x, y, z)
 
         fun color(
                 red: Double,
@@ -117,6 +117,22 @@ open class Tuple(
                 y * other.z - z * other.y,
                 z * other.x - x * other.z,
                 x * other.y - y * other.x
+        )
+    }
+
+    fun asPoint(): Point {
+        return point(
+                x,
+                y,
+                z
+        )
+    }
+
+    fun asVector(): Vector {
+        return vector(
+                x,
+                y,
+                z
         )
     }
 
