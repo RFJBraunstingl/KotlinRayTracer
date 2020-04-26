@@ -4,6 +4,7 @@ import dev.rfj.domain.MatrixMap
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
+import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import kotlin.test.assertEquals
@@ -37,6 +38,16 @@ class MatrixSteps(
             matrix: Matrix
     ) {
         matrixMap[name] = matrix.transpose()
+    }
+
+    @Given("{name} ← submatrix\\({matrixName}, {int}, {int})")
+    fun assignSubMatrix(
+            name: String,
+            matrix: Matrix,
+            rowToRemove: Int,
+            colToRemove: Int
+    ) {
+        matrixMap[name] = matrix.submatrix(rowToRemove, colToRemove)
     }
 
     @Then("{matrixName}[{int},{int}] = {double}")
@@ -118,4 +129,13 @@ class MatrixSteps(
         assertEquals(expected, input.submatrix(rowToRemove, colToRemove))
     }
 
+    @Then("minor\\({matrixName}, {int}, {int}) = {double}")
+    fun validateMinor(
+            matrix: Matrix,
+            row: Int,
+            col: Int,
+            expected: Double
+    ) {
+        expected.equalsWithDelta(matrix.minor(row, col))
+    }
 }

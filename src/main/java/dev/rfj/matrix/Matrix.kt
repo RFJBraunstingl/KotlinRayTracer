@@ -188,4 +188,8 @@ class Matrix(
 
         return result
     }
+
+    fun minor(row: Int, col: Int): Double {
+        return submatrix(row, col).determinant()
+    }
 }
