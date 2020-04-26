@@ -4,11 +4,13 @@ import dev.rfj.domain.MatrixMap
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
+import kotlin.math.exp
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 
 class MatrixSteps(
@@ -50,6 +52,14 @@ class MatrixSteps(
         matrixMap[name] = matrix.submatrix(rowToRemove, colToRemove)
     }
 
+    @Given("{name} ← inverse\\({matrixName})")
+    fun assignInversion(
+            name: String,
+            matrix: Matrix
+    ) {
+        matrixMap[name] = matrix.inverse()
+    }
+
     @Then("{matrixName}[{int},{int}] = {double}")
     fun validateMatrixValue(matrix: Matrix, row: Int, col: Int, value: Double) {
         val valueFromMatrix = matrix.getValueAt(row, col)
@@ -70,6 +80,16 @@ class MatrixSteps(
             matrix2: Matrix
     ) {
         assertNotEquals(matrix1, matrix2)
+    }
+
+    @Then("{matrixName} is the following {int}x{int} matrix:")
+    fun validateMatrix(
+            actual: Matrix,
+            rows: Int,
+            cols: Int,
+            expected: Matrix
+    ) {
+        assertEquals(expected, actual)
     }
 
     @Then("{matrixName} * {matrixName} is the following {int}x{int} matrix:")
@@ -147,5 +167,35 @@ class MatrixSteps(
             expected: Double
     ) {
         expected.equalsWithDelta(matrix.cofactor(row, col))
+    }
+
+    @Then("{matrixName} is invertible")
+    fun matrixIsInvertable(matrix: Matrix) {
+        assertTrue { matrix.isInversable() }
+    }
+
+    @Then("{matrixName} is not invertible")
+    fun matrixIsNotInvertable(matrix: Matrix) {
+        assertFalse{ matrix.isInversable() }
+    }
+
+    @Then("{matrixName}[{int},{int}] = {intDivision}")
+    fun valueOfMatrixEqualsIntDivision(
+            matrix: Matrix,
+            row: Int,
+            col: Int,
+            expected: Double
+    ) {
+        expected.equalsWithDelta(matrix.getValueAt(row, col))
+    }
+
+    @Then("inverse\\({matrixName}) is the following {int}x{int} matrix:")
+    fun assertInverse(
+            matrix: Matrix,
+            expectedRows: Int,
+            expectedColumns: Int,
+            expected: Matrix
+    ) {
+        assertEquals(expected, matrix.inverse())
     }
 }

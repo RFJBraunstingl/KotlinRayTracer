@@ -80,4 +80,9 @@ class CustomGherkinTypes(
                 blue.toDouble()
         )
     }
+
+    @ParameterType("(-?[0-9]+)\\/(-?[0-9]+)")
+    fun intDivision(op1: String, op2: String): Double {
+        return op1.toDouble() / op2.toDouble()
+    }
 }

@@ -2,6 +2,7 @@ package dev.rfj.matrix
 
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.util.equalsWithDelta
+import javax.naming.OperationNotSupportedException
 
 class Matrix(
         val numOfRows: Int,
@@ -212,5 +213,26 @@ class Matrix(
             return cofactor * -1;
 
         return cofactor
+    }
+
+    fun isInversable() = determinant() != 0.0
+
+    fun inverse(): Matrix {
+        val determinant = determinant()
+
+        if (determinant == 0.0)
+            throw OperationNotSupportedException("This matrix is not inversable!")
+
+        val result = Matrix(numOfRows, numOfColumns)
+
+        for (row in 0 until numOfRows) {
+            for (col in 0 until numOfColumns) {
+                val c = cofactor(row, col)
+
+                result.setValueAt(col, row, c / determinant)
+            }
+        }
+
+        return result
     }
 }
