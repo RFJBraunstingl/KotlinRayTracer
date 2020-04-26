@@ -60,6 +60,15 @@ class MatrixSteps(
         matrixMap[name] = matrix.inverse()
     }
 
+    @Given("{name} ← {matrixName} * {matrixName}")
+    fun assignMatrixProduct(
+            name: String,
+            matrix1: Matrix,
+            matrix2: Matrix
+    ) {
+        matrixMap[name] = matrix1.multipliedBy(matrix2)
+    }
+
     @Then("{matrixName}[{int},{int}] = {double}")
     fun validateMatrixValue(matrix: Matrix, row: Int, col: Int, value: Double) {
         val valueFromMatrix = matrix.getValueAt(row, col)
