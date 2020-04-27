@@ -130,6 +130,17 @@ class MatrixSteps(
         assertEquals(product, matrix.multipliedBy(tuple))
     }
 
+    @Then("{matrixName} * {tupleName} = {tupleName}")
+    fun validateMatrixTupleMultiplicationNamesOnly(
+            matrix: Matrix,
+            tuple: Tuple,
+            product: Tuple
+    ) {
+        validateMatrixTupleMultiplication(
+                matrix, tuple, product
+        )
+    }
+
     @Then("transpose\\({matrixName}) is the following matrix:")
     fun validateMatrixTransposition(
             input: Matrix,

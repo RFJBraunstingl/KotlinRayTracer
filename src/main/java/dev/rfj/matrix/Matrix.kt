@@ -39,6 +39,16 @@ class Matrix(
 
             return result
         }
+
+        fun scaling(x: Double, y: Double, z: Double): Matrix {
+            val result = identity4x4()
+
+            result.setValueAt(0, 0, x)
+            result.setValueAt(1, 1, y)
+            result.setValueAt(2, 2, z)
+
+            return result
+        }
     }
 
     private fun createValueMatrix(): MutableList<MutableList<Double>> {

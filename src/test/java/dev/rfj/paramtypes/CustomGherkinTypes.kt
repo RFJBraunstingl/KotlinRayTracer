@@ -16,7 +16,7 @@ class CustomGherkinTypes(
         private val matrixMap: MatrixMap
 ) {
 
-    @ParameterType("([a-zA-Z0-9]+)")
+    @ParameterType("([a-z0-9]+)")
     fun tupleName(name: String): Tuple = tupleStore.findByName(name)
 
     @ParameterType("([a-zA-Z0-9]+)")
