@@ -65,6 +65,21 @@ class TransformationSteps(
         matrixMap[name] = Matrix.rotationZ(rotationZ)
     }
 
+    @Given("{name} ← shearing\\({double}, {double}, {double}, {double}, {double}, {double})")
+    fun givenShearing(
+            name: String,
+            xy: Double,
+            xz: Double,
+            yx: Double,
+            yz: Double,
+            zx: Double,
+            zy: Double
+    ) {
+        matrixMap[name] = Matrix.shearing(
+                xy, xz, yx, yz, zx, zy
+        )
+    }
+
     @Then("{matrixName} * {tupleName} = {point}")
     fun validateMatrixPointMultiplication(
             matrix: Matrix,

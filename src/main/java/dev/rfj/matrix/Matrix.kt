@@ -112,6 +112,25 @@ class Matrix(
 
             return result
         }
+
+        fun shearing(xy: Double, xz: Double, yx: Double, yz: Double, zx: Double, zy: Double): Matrix {
+            val result = identity4x4()
+
+            /*
+             * [  1  xy  xz  0 ]
+             * [ yx   1  yz  0 ]
+             * [ zx  zy   1  0 ]
+             * [  0   0   0  1 ]
+             */
+            result.setValueAt(0, 1, xy)
+            result.setValueAt(0, 2, xz)
+            result.setValueAt(1, 0, yx)
+            result.setValueAt(1, 2, yz)
+            result.setValueAt(2, 0, zx)
+            result.setValueAt(2, 1, zy)
+
+            return result
+        }
     }
 
     private fun createValueMatrix(): MutableList<MutableList<Double>> {
