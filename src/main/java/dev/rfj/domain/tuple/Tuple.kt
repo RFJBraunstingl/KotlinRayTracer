@@ -1,5 +1,6 @@
 package dev.rfj.domain.tuple
 
+import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
 import kotlin.math.sqrt
 
@@ -158,5 +159,9 @@ open class Tuple(
 
     override fun toString(): String {
         return "Tuple(x=$x, y=$y, z=$z, w=$w)"
+    }
+
+    fun transform(matrix: Matrix): Tuple {
+        return matrix.multipliedBy(this)
     }
 }

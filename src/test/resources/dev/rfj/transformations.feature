@@ -102,6 +102,30 @@ Feature: Matrix Transformations
 
   Scenario: A shearing transformation moves z in proportion to y
     Given T ← shearing(0, 0, 0, 0, 0, 1)
-    And "p" <- point(2.0, 3.0, 4.0)0
+    And "p" <- point(2.0, 3.0, 4.0)
     Then T * p = point(2.0, 3.0, 7.0)
 
+  Scenario: Individual transformations are applied in sequence
+    Given "p" <- point(1.0, 0.0, 1.0)
+    # π / 2 = 1.57079632679
+    And A ← rotation_x(1.57079632679)
+    And B ← scaling(5, 5, 5)
+    And C ← translation(10, 5, 7)
+  # apply rotation first
+    When p2 ← A * p
+    Then p2 = point(1.0, -1.0, 0.0)
+  # then apply scaling
+    When p3 ← B * p2
+    Then p3 = point(5.0, -5.0, 0.0)
+  # then apply translation
+    When p4 ← C * p3
+    Then p4 = point(15.0, 0.0, 7.0)
+
+  Scenario: Chained transformations must be applied in reverse order
+    Given "p" <- point(1.0, 0.0, 1.0)
+    # π / 2 = 1.57079632679
+    And A ← rotation_x(1.57079632679)
+    And B ← scaling(5, 5, 5)
+    And C ← translation(10, 5, 7)
+    When T ← C * B * A
+    Then T * p = point(15.0, 0.0, 7.0)

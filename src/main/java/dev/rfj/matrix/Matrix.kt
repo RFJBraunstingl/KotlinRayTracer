@@ -337,4 +337,24 @@ class Matrix(
 
         return result
     }
+
+    fun rotateX(rotationInRad: Double): Matrix {
+        return rotationX(rotationInRad).multipliedBy(this)
+    }
+
+    fun rotateY(rotationInRad: Double): Matrix {
+        return rotationY(rotationInRad).multipliedBy(this)
+    }
+
+    fun rotateZ(rotationInRad: Double): Matrix {
+        return rotationZ(rotationInRad).multipliedBy(this)
+    }
+
+    fun scale(x: Double, y: Double, z: Double): Matrix {
+        return scaling(x, y, z).multipliedBy(this)
+    }
+
+    fun translate(x: Double, y: Double, z: Double): Matrix {
+        return translation(x, y, z).multipliedBy(this)
+    }
 }
