@@ -5,6 +5,8 @@ import dev.rfj.domain.tuple.Point
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.output.canvasToPPM
 import dev.rfj.output.dumpToFile
+import dev.rfj.output.plot
+import dev.rfj.output.render
 
 fun main() {
     val canvas = Canvas(1000, 500)
@@ -12,7 +14,7 @@ fun main() {
 
     runProjectileSimulation(canvas)
 
-    canvasToPPM(canvas).dumpToFile()
+    canvas.render()
 }
 
 private fun runProjectileSimulation(canvas: Canvas) {
@@ -40,19 +42,5 @@ private fun runProjectileSimulation(canvas: Canvas) {
 }
 
 fun plotPositionOnCanvas(position: Point, canvas: Canvas) {
-    val color = Tuple.color(0.0, 0.0, 1.0)
-    val x = (position.x * 100).toInt()
-    var y = (position.y * 100).toInt()
-
-    if (x < 1 ||
-            x > canvas.width ||
-            y < 1 ||
-            y > canvas.height)
-        return
-
-    // invert y
-    y = canvas.height - y
-
-    // - 1 taking care of zero index
-    canvas.setPixelAt(x - 1, y - 1, color)
+    canvas.plot(position)
 }
