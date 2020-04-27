@@ -16,6 +16,9 @@ class CustomGherkinTypes(
         private val matrixMap: MatrixMap
 ) {
 
+    @ParameterType("([a-zA-Z0-9_]+)")
+    fun name(name: String): String = name
+
     @ParameterType("([a-z0-9]+)")
     fun tupleName(name: String): Tuple = tupleStore.findByName(name)
 
@@ -32,16 +35,13 @@ class CustomGherkinTypes(
     }
 
     // matrices must be named with capital letters
-    @ParameterType("([A-Z0-9]+|(identity_matrix))")
+    @ParameterType("([A-Z0-9_]+|(identity_matrix))")
     fun matrixName(name: String): Matrix {
         if ("identity_matrix" == name)
             return Matrix.identity4x4()
 
         return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }
-
-    @ParameterType("([a-zA-Z0-9]+)")
-    fun name(name: String): String = name
 
 
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")

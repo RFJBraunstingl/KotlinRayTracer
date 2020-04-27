@@ -41,6 +41,30 @@ class TransformationSteps(
         )
     }
 
+    @Given("{name} ← rotation_x\\({double})")
+    fun givenRotationX(
+            name: String,
+            rotationX: Double
+    ) {
+        matrixMap[name] = Matrix.rotationX(rotationX)
+    }
+
+    @Given("{name} ← rotation_y\\({double})")
+    fun givenRotationY(
+            name: String,
+            rotationY: Double
+    ) {
+        matrixMap[name] = Matrix.rotationY(rotationY)
+    }
+
+    @Given("{name} ← rotation_z\\({double})")
+    fun givenRotationZ(
+            name: String,
+            rotationZ: Double
+    ) {
+        matrixMap[name] = Matrix.rotationZ(rotationZ)
+    }
+
     @Then("{matrixName} * {tupleName} = {point}")
     fun validateMatrixPointMultiplication(
             matrix: Matrix,

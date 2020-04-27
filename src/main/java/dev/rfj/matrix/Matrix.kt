@@ -3,6 +3,8 @@ package dev.rfj.matrix
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.util.equalsWithDelta
 import javax.naming.OperationNotSupportedException
+import kotlin.math.cos
+import kotlin.math.sin
 
 class Matrix(
         val numOfRows: Int,
@@ -46,6 +48,67 @@ class Matrix(
             result.setValueAt(0, 0, x)
             result.setValueAt(1, 1, y)
             result.setValueAt(2, 2, z)
+
+            return result
+        }
+
+        fun rotationX(rotationInRad: Double): Matrix {
+            val result = identity4x4()
+
+            val sin = sin(rotationInRad)
+            val cos = cos(rotationInRad)
+
+            /*
+             * [ 1   0    0   0 ]
+             * [ 0  cos -sin  0 ]
+             * [ 0  sin  cos  0 ]
+             * [ 0   0    0   1 ]
+             */
+
+            result.setValueAt(1, 1, cos)
+            result.setValueAt(1, 2, -sin)
+            result.setValueAt(2, 1, sin)
+            result.setValueAt(2, 2, cos)
+
+            return result
+        }
+
+        fun rotationY(rotationInRad: Double): Matrix {
+            val result = identity4x4()
+
+            val sin = sin(rotationInRad)
+            val cos = cos(rotationInRad)
+
+            /*
+             * [ cos  0  sin 0 ]
+             * [  0   1   0  0 ]
+             * [ -sin 0  cos 0 ]
+             * [  0   0   0  1 ]
+             */
+            result.setValueAt(0, 0, cos)
+            result.setValueAt(0, 2, sin)
+            result.setValueAt(2, 0, -sin)
+            result.setValueAt(2, 2, cos)
+
+            return result
+        }
+
+        fun rotationZ(rotationInRad: Double): Matrix {
+            val result = identity4x4()
+
+            val sin = sin(rotationInRad)
+            val cos = cos(rotationInRad)
+
+            /*
+             * [ cos -sin  0  0 ]
+             * [ sin  cos  0  0 ]
+             * [  0    0   1  0 ]
+             * [  0    0   0  1 ]
+             */
+            result.setValueAt(0, 0, cos)
+            result.setValueAt(0, 1, -sin)
+            result.setValueAt(1, 0, sin)
+            result.setValueAt(1, 1, cos)
 
             return result
         }
