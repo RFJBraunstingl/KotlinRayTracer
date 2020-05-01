@@ -2,6 +2,8 @@ package dev.rfj.paramtypes
 
 import dev.rfj.canvas.Canvas
 import dev.rfj.domain.MatrixMap
+import dev.rfj.domain.Ray
+import dev.rfj.domain.RayMap
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import dev.rfj.domain.tuple.Color
@@ -13,7 +15,8 @@ import kotlin.test.fail
 class CustomGherkinTypes(
         private val tupleStore: TupleStore,
         private val canvasMap: CanvasMap,
-        private val matrixMap: MatrixMap
+        private val matrixMap: MatrixMap,
+        private val rayStore: RayMap
 ) {
 
     @ParameterType("([a-zA-Z0-9_]+)")
@@ -43,6 +46,11 @@ class CustomGherkinTypes(
         return matrixMap[name] ?: fail("Could not find matrix with name $name!")
     }
 
+    // rays start with "r"
+    @ParameterType("r[a-z0-9]*")
+    fun rayName(name: String): Ray {
+        return rayStore[name] ?: fail("Could not find ray with name $name")
+    }
 
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun tuple(x: String, y: String, z: String, w: String): Tuple {

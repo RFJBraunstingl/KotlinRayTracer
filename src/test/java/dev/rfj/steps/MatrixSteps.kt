@@ -6,7 +6,6 @@ import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-import kotlin.math.exp
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
