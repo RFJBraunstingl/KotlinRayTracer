@@ -63,7 +63,7 @@ class CustomGherkinTypes(
     fun intersectionName(name: String) = intersectionMap[name] ?: fail("Error searching intersection store for $name")
 
     @ParameterType("[a-z0-9]+")
-    fun intersectionCollectionName(name: String) = intersectionCollectionStore[name] ?: fail()
+    fun intersectionCollectionName(name: String) = intersectionCollectionStore[name] ?: fail("Intersection collection not found!")
 
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun tuple(x: String, y: String, z: String, w: String): Tuple {
