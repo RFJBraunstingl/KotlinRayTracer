@@ -1,5 +1,6 @@
 package dev.rfj.steps
 
+import dev.rfj.domain.IntersectionCollectionStore
 import dev.rfj.domain.intersection.Intersection
 import dev.rfj.domain.IntersectionMap
 import dev.rfj.domain.intersection.IntersectionCollection
@@ -13,11 +14,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class IntersectionSteps(
-        private val intersectionMap: IntersectionMap
+        private val intersectionMap: IntersectionMap,
+        private val intersectionCollectionStore: IntersectionCollectionStore
 ) {
-
-    private lateinit var xs: IntersectionCollection
-    private lateinit var hit: Optional<Intersection>
 
     @Given("{name} ← intersection\\({double}, {sphereName})")
     fun constructIntersection(
@@ -28,12 +27,13 @@ class IntersectionSteps(
         intersectionMap[name] = Intersection(t, sphere)
     }
 
-    @When("xs ← intersections\\({intersectionName}, {intersectionName})")
+    @When("{name} ← intersections\\({intersectionName}, {intersectionName})")
     fun aggregateIntersections(
+            name: String,
             i1: Intersection,
             i2: Intersection
     ) {
-        xs = IntersectionCollection(i1, i2)
+        intersectionCollectionStore[name] = IntersectionCollection(i1, i2)
     }
 
     @When("{name} ← hit(xs)")
