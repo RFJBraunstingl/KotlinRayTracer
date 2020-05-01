@@ -1,6 +1,6 @@
 package dev.rfj.domain.shapes
 
-import dev.rfj.domain.Intersection
+import dev.rfj.domain.intersection.Intersection
 import dev.rfj.domain.Ray
 import dev.rfj.domain.tuple.Point
 import kotlin.math.sqrt

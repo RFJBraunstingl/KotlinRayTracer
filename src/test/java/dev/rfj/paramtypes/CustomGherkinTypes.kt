@@ -17,7 +17,8 @@ class CustomGherkinTypes(
         private val matrixMap: MatrixMap,
         private val rayStore: RayMap,
         private val sphereMap: SphereMap,
-        private val intersectionMap: IntersectionMap
+        private val intersectionMap: IntersectionMap,
+        private val intersectionCollectionStore: IntersectionCollectionStore
 ) {
 
     @ParameterType("([a-zA-Z0-9_]+)")
@@ -60,6 +61,9 @@ class CustomGherkinTypes(
 
     @ParameterType("[a-z0-9]+")
     fun intersectionName(name: String) = intersectionMap[name] ?: fail("Error searching intersection store for $name")
+
+    @ParameterType("[a-z0-9]+")
+    fun intersectionCollectionName(name: String) = intersectionCollectionStore[name] ?: fail()
 
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun tuple(x: String, y: String, z: String, w: String): Tuple {
