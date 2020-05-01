@@ -8,3 +8,5 @@ class MatrixMap: HashMap<String, Matrix>()
 class RayMap: HashMap<String, Ray>()
 
 class SphereMap: HashMap<String, Sphere>()
+
+class IntersectionMap: HashMap<String, Intersection>()

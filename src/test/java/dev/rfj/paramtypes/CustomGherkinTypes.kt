@@ -1,10 +1,7 @@
 package dev.rfj.paramtypes
 
 import dev.rfj.canvas.Canvas
-import dev.rfj.domain.MatrixMap
-import dev.rfj.domain.Ray
-import dev.rfj.domain.RayMap
-import dev.rfj.domain.SphereMap
+import dev.rfj.domain.*
 import dev.rfj.domain.shapes.Sphere
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
@@ -19,7 +16,8 @@ class CustomGherkinTypes(
         private val canvasMap: CanvasMap,
         private val matrixMap: MatrixMap,
         private val rayStore: RayMap,
-        private val sphereMap: SphereMap
+        private val sphereMap: SphereMap,
+        private val intersectionMap: IntersectionMap
 ) {
 
     @ParameterType("([a-zA-Z0-9_]+)")
@@ -60,6 +58,9 @@ class CustomGherkinTypes(
         return sphereMap[name] ?: fail("Could not find sphere w/ that name :( ($name)")
     }
 
+    @ParameterType("[a-z0-9]+")
+    fun intersectionName(name: String) = intersectionMap[name] ?: fail("Error searching intersection store for $name")
+
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
     fun tuple(x: String, y: String, z: String, w: String): Tuple {
         return Tuple.create(
@@ -70,7 +71,7 @@ class CustomGherkinTypes(
         )
     }
 
-    @ParameterType("vector\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
+    @ParameterType("vector\\((-?\\d+\\.?\\d*), (-?\\d+\\.?\\d*), (-?\\d+\\.?\\d*)\\)")
     fun vector(x: String, y: String, z: String): Tuple {
         return Tuple.vector(
                 x.toDouble(),
@@ -79,7 +80,7 @@ class CustomGherkinTypes(
         )
     }
 
-    @ParameterType("point\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
+    @ParameterType("point\\((-?\\d+\\.?\\d*), (-?\\d+\\.?\\d*), (-?\\d+\\.?\\d*)\\)")
     fun point(x: String, y: String, z: String): Tuple {
         return Tuple.point(
                 x.toDouble(),

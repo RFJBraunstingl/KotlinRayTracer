@@ -71,7 +71,7 @@ class MatrixSteps(
     @Then("{matrixName}[{int},{int}] = {double}")
     fun validateMatrixValue(matrix: Matrix, row: Int, col: Int, value: Double) {
         val valueFromMatrix = matrix.getValueAt(row, col)
-        value.equalsWithDelta(valueFromMatrix)
+        assertTrue { value.equalsWithDelta(valueFromMatrix) }
     }
 
     @Then("{matrixName} = {matrixName}")
@@ -153,7 +153,7 @@ class MatrixSteps(
             matrix: Matrix,
             determinant: Double
     ) {
-        determinant.equalsWithDelta(matrix.determinant())
+        assertTrue { determinant.equalsWithDelta(matrix.determinant()) }
     }
 
     @Then("submatrix\\({matrixName}, {int}, {int}) is the following {int}x{int} matrix:")
@@ -175,7 +175,7 @@ class MatrixSteps(
             col: Int,
             expected: Double
     ) {
-        expected.equalsWithDelta(matrix.minor(row, col))
+        assertTrue { expected.equalsWithDelta(matrix.minor(row, col)) }
     }
 
     @Then("cofactor\\({matrixName}, {int}, {int}) = {double}")
@@ -185,7 +185,7 @@ class MatrixSteps(
             col: Int,
             expected: Double
     ) {
-        expected.equalsWithDelta(matrix.cofactor(row, col))
+        assertTrue { expected.equalsWithDelta(matrix.cofactor(row, col)) }
     }
 
     @Then("{matrixName} is invertible")
@@ -205,7 +205,7 @@ class MatrixSteps(
             col: Int,
             expected: Double
     ) {
-        expected.equalsWithDelta(matrix.getValueAt(row, col))
+        assertTrue { expected.equalsWithDelta(matrix.getValueAt(row, col)) }
     }
 
     @Then("inverse\\({matrixName}) is the following {int}x{int} matrix:")
