@@ -4,6 +4,8 @@ import dev.rfj.canvas.Canvas
 import dev.rfj.domain.MatrixMap
 import dev.rfj.domain.Ray
 import dev.rfj.domain.RayMap
+import dev.rfj.domain.SphereMap
+import dev.rfj.domain.shapes.Sphere
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.store.TupleStore
 import dev.rfj.domain.tuple.Color
@@ -16,7 +18,8 @@ class CustomGherkinTypes(
         private val tupleStore: TupleStore,
         private val canvasMap: CanvasMap,
         private val matrixMap: MatrixMap,
-        private val rayStore: RayMap
+        private val rayStore: RayMap,
+        private val sphereMap: SphereMap
 ) {
 
     @ParameterType("([a-zA-Z0-9_]+)")
@@ -50,6 +53,11 @@ class CustomGherkinTypes(
     @ParameterType("r[a-z0-9]*")
     fun rayName(name: String): Ray {
         return rayStore[name] ?: fail("Could not find ray with name $name")
+    }
+
+    @ParameterType("[a-z0-9]+")
+    fun sphereName(name: String): Sphere {
+        return sphereMap[name] ?: fail("Could not find sphere w/ that name :( ($name)")
     }
 
     @ParameterType("tuple\\((-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+), (-?\\d+\\.\\d+)\\)")
