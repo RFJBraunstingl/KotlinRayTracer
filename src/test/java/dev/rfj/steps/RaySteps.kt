@@ -5,15 +5,15 @@ import dev.rfj.domain.RayMap
 import dev.rfj.domain.tuple.Point
 import dev.rfj.domain.tuple.Tuple
 import dev.rfj.domain.tuple.Vector
+import dev.rfj.matrix.Matrix
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import kotlin.test.assertEquals
 
 class RaySteps(
         private val rayMap: RayMap
 ) {
-
-    /* GIVEN */
 
     @Given("{name} ← ray\\({tupleName}, {tupleName})")
     fun constructRay(
@@ -33,8 +33,17 @@ class RaySteps(
         rayMap[name] = Ray(origin, direction)
     }
 
+    @When("{name} ← transform\\({rayName}, {matrixName})")
+    fun transformRay(
+            nameOfTransformedRay: String,
+            input: Ray,
+            transformation: Matrix
+    ) {
+        rayMap[nameOfTransformedRay] = input.transform(transformation)
+    }
 
-    /* THEN */
+    @Then("{rayName}.origin = {point}")
+    fun validatePoint(ray: Ray, expected: Point) = validateOrigin(ray, expected)
 
     @Then("{rayName}.origin = {tupleName}")
     fun validateOrigin(
@@ -43,6 +52,9 @@ class RaySteps(
     ) {
         assertEquals(origin, ray.origin)
     }
+
+    @Then("{rayName}.direction = {vector}")
+    fun validateDirectionVector(ray: Ray, direction: Vector) = validateDirection(ray, direction)
 
     @Then("{rayName}.direction = {tupleName}")
     fun validateDirection(
