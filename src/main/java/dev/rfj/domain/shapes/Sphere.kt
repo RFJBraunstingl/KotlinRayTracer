@@ -3,13 +3,18 @@ package dev.rfj.domain.shapes
 import dev.rfj.domain.intersection.Intersection
 import dev.rfj.domain.Ray
 import dev.rfj.domain.tuple.Point
+import dev.rfj.matrix.Matrix
 import kotlin.math.sqrt
 
 data class Sphere(
         val radius: Double,
-        val position: Point
+        val position: Point,
+        var transform: Matrix
 ) {
-    fun intersections(ray: Ray): List<Intersection> {
+
+    fun intersections(input: Ray): List<Intersection> {
+        val ray = input.transform(transform.inverse())
+
         val sphereToRay = ray.origin.minus(position)
 
         val a = ray.direction.dotProduct(ray.direction)

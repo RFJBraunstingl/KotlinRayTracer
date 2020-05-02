@@ -45,3 +45,31 @@ Feature: Spheres
     Then xs.count = 2
     And xs[0].object = s
     And xs[1].object = s
+
+  Scenario: A sphere's default transformation
+    Given s ← sphere()
+    Then s.transform = identity_matrix
+
+  Scenario: Changing a sphere's transformation
+    Given s ← sphere()
+    And T ← translation(2, 3, 4)
+    When set_transform(s, T)
+    Then s.transform = T
+
+  Scenario: Intersecting a scaled sphere with a ray
+    Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
+    And s ← sphere()
+    And T ← scaling(2, 2, 2)
+    When set_transform(s, T)
+    And xs ← intersect(s, r)
+    Then xs.count = 2
+    And xs[0].t = 3
+    And xs[1].t = 7
+
+  Scenario: Intersecting a translated sphere with a ray
+    Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
+    And s ← sphere()
+    And T ← translation(5, 0, 0)
+    When set_transform(s, T)
+    And xs ← intersect(s, r)
+    Then xs.count = 0

@@ -8,6 +8,7 @@ import dev.rfj.domain.SphereMap
 import dev.rfj.domain.intersection.IntersectionCollection
 import dev.rfj.domain.shapes.ShapeFactory
 import dev.rfj.domain.shapes.Sphere
+import dev.rfj.matrix.Matrix
 import dev.rfj.util.equalsWithDelta
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -48,6 +49,13 @@ class SphereSteps(
         intersectionCollectionStore[name] = IntersectionCollection(sphere.intersections(ray))
     }
 
+    @When("set_transform\\({sphereName}, {matrixName})")
+    fun setSphereTransform(
+            sphere: Sphere,
+            transform: Matrix
+    ) {
+        sphere.transform = transform
+    }
 
     /* THEN */
 
@@ -75,5 +83,13 @@ class SphereSteps(
             sphere: Sphere
     ) {
         assertEquals(sphere, intersections[index].obj)
+    }
+
+    @Then("{sphereName}.transform = {matrixName}")
+    fun validateTransform(
+            sphere: Sphere,
+            expected: Matrix
+    ) {
+        assertEquals(expected, sphere.transform)
     }
 }

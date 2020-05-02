@@ -2,6 +2,7 @@ package dev.rfj.domain.shapes
 
 import dev.rfj.domain.tuple.Point
 import dev.rfj.domain.tuple.Tuple
+import dev.rfj.matrix.Matrix
 
 class ShapeFactory {
 
@@ -17,7 +18,8 @@ class ShapeFactory {
         private fun createSphereWithRadiusAt(radius: Double, position: Point): Sphere {
             return Sphere(
                     radius,
-                    position
+                    position,
+                    Matrix.identity4x4()
             )
         }
     }
