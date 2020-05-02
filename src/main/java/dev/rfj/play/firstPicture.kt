@@ -5,6 +5,7 @@ import dev.rfj.domain.Ray
 import dev.rfj.domain.shapes.ShapeFactory
 import dev.rfj.domain.shapes.Sphere
 import dev.rfj.domain.tuple.Tuple
+import dev.rfj.matrix.Matrix
 import dev.rfj.output.render
 
 const val SIZE_IN_PX = 500
@@ -19,14 +20,19 @@ fun main() {
 
     val target = ShapeFactory.createUnitSphere() // -1.0..1.0 on x and y axis
 
+    target.transform =
+            Matrix
+                    .shearing(1.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                    .scale(1.0, 2.0, 1.0)
+
     val zCoord = -1.0
     val direction = Tuple.vector(0.0, 0.0, 1.0)
 
-    for (y in 0..SIZE_IN_PX) {
+    for (y in 0 until SIZE_IN_PX) {
 
         val yCoord = pxToCoord(y)
 
-        for (x in 0..SIZE_IN_PX) {
+        for (x in 0 until SIZE_IN_PX) {
             val xCoord = pxToCoord(x)
             val origin = Tuple.point(xCoord, yCoord, zCoord)
 
